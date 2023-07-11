@@ -1,0 +1,745 @@
+s/django/db/backends/base/base.py", line 323, in cursor
+    return self._cursor()
+  File "/home/girishparate/test_girish/env/lib/python3.8/site-packages/django/db/backends/base/base.py", line 299, in _cursor
+    self.ensure_connection()
+  File "/home/girishparate/test_girish/env/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/girishparate/test_girish/env/lib/python3.8/site-packages/django/db/backends/base/base.py", line 282, in ensure_connection
+    self.connect()
+  File "/home/girishparate/test_girish/env/lib/python3.8/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/girishparate/test_girish/env/lib/python3.8/site-packages/django/db/backends/base/base.py", line 282, in ensure_connection
+    self.connect()
+  File "/home/girishparate/test_girish/env/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/girishparate/test_girish/env/lib/python3.8/site-packages/django/db/backends/base/base.py", line 263, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "/home/girishparate/test_girish/env/lib/python3.8/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "/home/girishparate/test_girish/env/lib/python3.8/site-packages/django/db/backends/postgresql/base.py", line 215, in get_new_connection
+    connection = Database.connect(**conn_params)
+  File "/home/girishparate/test_girish/env/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+django.db.utils.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: fe_sendauth: no password supplied
+
+/home/girishparate/test_girish/testgis/testgis/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+Run 'python manage.py migrate' to apply them.
+July 11, 2023 - 13:01:42
+Django version 4.1.1, using settings 'testgis.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+(env) girishparate@sperentes-asus02:~/test_girish/testgis$ c
+d my_app/data/
+(env) girishparate@sperentes-asus02:~/test_girish/testgis/my_app/data$ unzip TM_WORLD_BORDERS-0.3.zip 
+Archive:  TM_WORLD_BORDERS-0.3.zip
+  inflating: Readme.txt              
+  inflating: TM_WORLD_BORDERS-0.3.dbf  
+  inflating: TM_WORLD_BORDERS-0.3.prj  
+  inflating: TM_WORLD_BORDERS-0.3.shp  
+  inflating: TM_WORLD_BORDERS-0.3.shx  
+(env) girishparate@sperentes-asus02:~/test_girish/testgis/my_app/data$ ogrinfo TM_WORLD_BORDERS-0.3.shp
+INFO: Open of `TM_WORLD_BORDERS-0.3.shp'
+      using driver `ESRI Shapefile' successful.
+1: TM_WORLD_BORDERS-0.3 (Polygon)
+(env) girishparate@sperentes-asus02:~/test_girish/testgis/my_app/data$ ogrinfo -so TM_WORLD_BORDERS-0.3.shp TM_WORLD_BORDERS-0.3
+INFO: Open of `TM_WORLD_BORDERS-0.3.shp'
+      using driver `ESRI Shapefile' successful.
+
+Layer name: TM_WORLD_BORDERS-0.3
+Metadata:
+  DBF_DATE_LAST_UPDATE=2008-07-30
+Geometry: Polygon
+Feature Count: 246
+Extent: (-180.000000, -90.000000) - (180.000000, 83.623596)
+Layer SRS WKT:
+GEOGCRS["WGS 84",
+    DATUM["World Geodetic System 1984",
+        ELLIPSOID["WGS 84",6378137,298.257223563,
+            LENGTHUNIT["metre",1]]],
+    PRIMEM["Greenwich",0,
+        ANGLEUNIT["degree",0.0174532925199433]],
+    CS[ellipsoidal,2],
+        AXIS["latitude",north,
+            ORDER[1],
+            ANGLEUNIT["degree",0.0174532925199433]],
+        AXIS["longitude",east,
+            ORDER[2],
+            ANGLEUNIT["degree",0.0174532925199433]],
+    ID["EPSG",4326]]
+Data axis to CRS axis mapping: 2,1
+FIPS: String (2.0)
+ISO2: String (2.0)
+ISO3: String (3.0)
+UN: Integer (3.0)
+NAME: String (50.0)
+AREA: Integer (7.0)
+POP2005: Integer64 (10.0)
+REGION: Integer (3.0)
+SUBREGION: Integer (3.0)
+LON: Real (8.3)
+LAT: Real (7.3)
+(env) girishparate@sperentes-asus02:~/test_girish/testgis/my_app/data$ cd ..
+(env) girishparate@sperentes-asus02:~/test_girish/testgis/my_app$ cd ..
+(env) girishparate@sperentes-asus02:~/test_girish/testgis$ python manage.py makemigrations
+Migrations for 'my_app':
+  my_app/migrations/0001_initial.py
+    - Create model WorldBorder
+(env) girishparate@sperentes-asus02:~/test_girish/testgis$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, my_app, sessions
+Running migrations:
+  Applying my_app.0001_initial... OK
+(env) girishparate@sperentes-asus02:~/test_girish/testgis$ python manage.py shell
+Python 3.8.10 (default, May 26 2023, 14:05:08) 
+[GCC 9.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from pathlib import Path
+>>> import world
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+ModuleNotFoundError: No module named 'world'
+>>> import my_app
+>>> world_shp = Path(my_app.__file__).resolve().parent / "data" / "TM_WORLD_BORDERS-0.3.shp"
+>>> from django.contrib.gis.gdal import DataSource
+>>> ds = DataSource(world_shp)
+>>> print(ds)
+/home/girishparate/test_girish/testgis/my_app/data/TM_WORLD_BORDERS-0.3.shp (ESRI Shapefile)
+>>> print(len(ds))
+1
+>>> lyr = ds[0]
+>>> print(lyr)
+TM_WORLD_BORDERS-0.3
+>>> print(lyr.geom_type)
+Polygon
+>>> print(len(lyr))
+246
+>>> srs = lyr.srs
+>>> print(srs)
+GEOGCS["WGS 84",
+    DATUM["WGS_1984",
+        SPHEROID["WGS 84",6378137,298.257223563,
+            AUTHORITY["EPSG","7030"]],
+        AUTHORITY["EPSG","6326"]],
+    PRIMEM["Greenwich",0,
+        AUTHORITY["EPSG","8901"]],
+    UNIT["degree",0.0174532925199433,
+        AUTHORITY["EPSG","9122"]],
+    AXIS["Latitude",NORTH],
+    AXIS["Longitude",EAST],
+    AUTHORITY["EPSG","4326"]]
+>>> srs.proj
+'+proj=longlat +datum=WGS84 +no_defs'
+>>> print(lyr.fields)
+['FIPS', 'ISO2', 'ISO3', 'UN', 'NAME', 'AREA', 'POP2005', 'REGION', 'SUBREGION', 'LON', 'LAT']
+>>> [fld.__name__ for fld in lyr.field_types]
+['OFTString', 'OFTString', 'OFTString', 'OFTInteger', 'OFTString', 'OFTInteger', 'OFTInteger64', 'OFTInteger', 'OFTInteger', 'OFTReal', 'OFTReal']
+>>> for feat in lyr:
+...     print(feat.get("NAME"), feat.geom.num_points)
+... 
+Antigua and Barbuda 48
+Algeria 1241
+Azerbaijan 871
+Albania 337
+Armenia 418
+Angola 1113
+American Samoa 72
+Argentina 3781
+Australia 8340
+Bahrain 111
+Barbados 49
+Bermuda 60
+Bahamas 1002
+Bangladesh 1935
+Belize 283
+Bosnia and Herzegovina 399
+Bolivia 1026
+Burma 3147
+Benin 383
+Solomon Islands 1389
+Brazil 7267
+Bulgaria 564
+Brunei Darussalam 150
+Canada 55563
+Cambodia 776
+Sri Lanka 457
+Congo 1056
+Democratic Republic of the Congo 2201
+Burundi 257
+China 9019
+Afghanistan 1298
+Bhutan 360
+Chile 11490
+Cayman Islands 67
+Cameroon 1068
+Chad 728
+Comoros 122
+Colombia 1953
+Costa Rica 393
+Central African Republic 1100
+Cuba 1359
+Cape Verde 179
+Cook Islands 198
+Cyprus 187
+Denmark 1608
+Djibouti 184
+Dominica 36
+Dominican Republic 473
+Ecuador 1184
+Egypt 1039
+Ireland 1028
+Equatorial Guinea 190
+Estonia 735
+Eritrea 693
+El Salvador 290
+Ethiopia 920
+Austria 596
+Czech Republic 520
+French Guiana 336
+Finland 1968
+Fiji 911
+Falkland Islands (Malvinas) 672
+Micronesia, Federated States of 237
+French Polynesia 668
+France 2007
+Gambia 310
+Gabon 878
+Georgia 505
+Ghana 562
+Grenada 55
+Greenland 21396
+Germany 2157
+Guam 55
+Greece 3204
+Guatemala 301
+Guinea 928
+Guyana 748
+Haiti 436
+Honduras 770
+Croatia 1365
+Hungary 616
+Iceland 1466
+India 5626
+Iran (Islamic Republic of) 2193
+Israel 281
+Italy 2317
+Cote d'Ivoire 906
+Iraq 648
+Japan 4450
+Jamaica 178
+Jordan 153
+Kenya 480
+Kyrgyzstan 1167
+Korea, Democratic People's Republic of 777
+Kiribati 700
+Korea, Republic of 1178
+Kuwait 203
+Kazakhstan 3682
+Lao People's Democratic Republic 1174
+Lebanon 172
+Latvia 535
+Belarus 996
+Lithuania 565
+Liberia 429
+Slovakia 403
+Liechtenstein 28
+Libyan Arab Jamahiriya 757
+Madagascar 1114
+Martinique 32
+Mongolia 1881
+Montserrat 19
+The former Yugoslav Republic of Macedonia 219
+Mali 1026
+Morocco 769
+Mauritius 72
+Mauritania 623
+Malta 44
+Oman 753
+Maldives 704
+Mexico 4134
+Malaysia 2036
+Mozambique 1460
+Malawi 603
+New Caledonia 570
+Niue 19
+Niger 570
+Aruba 19
+Anguilla 21
+Belgium 381
+Hong Kong 88
+Northern Mariana Islands 243
+Faroe Islands 210
+Andorra 29
+Gibraltar 10
+Isle of Man 42
+Luxembourg 84
+Macau 11
+Monaco 15
+Palestine 139
+Montenegro 268
+Mayotte 51
+Åland Islands 164
+Norfolk Island 12
+Cocos (Keeling) Islands 17
+Antarctica 24893
+Bouvet Island 28
+French Southern and Antarctic Lands 592
+Heard Island and McDonald Islands 48
+British Indian Ocean Territory 123
+Christmas Island 11
+United States Minor Outlying Islands 77
+Vanuatu 796
+Nigeria 1201
+Netherlands 1054
+Norway 8396
+Nepal 643
+Nauru 19
+Suriname 447
+Nicaragua 589
+New Zealand 2481
+Paraguay 715
+Peru 1696
+Pakistan 1991
+Poland 924
+Panama 991
+Portugal 768
+Papua New Guinea 3038
+Guinea-Bissau 705
+Qatar 196
+Reunion 44
+Romania 975
+Republic of Moldova 425
+Philippines 4630
+Puerto Rico 141
+Russia 35822
+Rwanda 250
+Saudi Arabia 1051
+Saint Kitts and Nevis 55
+Seychelles 135
+South Africa 1536
+Lesotho 175
+Botswana 686
+Senegal 841
+Slovenia 301
+Sierra Leone 367
+Singapore 33
+Somalia 760
+Spain 1655
+Saint Lucia 35
+Sudan 1398
+Sweden 2638
+Syrian Arab Republic 412
+Switzerland 545
+Trinidad and Tobago 120
+Thailand 2304
+Tajikistan 1070
+Tokelau 41
+Tonga 283
+Togo 347
+Sao Tome and Principe 42
+Tunisia 762
+Turkey 2186
+Tuvalu 96
+Turkmenistan 1554
+United Republic of Tanzania 1037
+Uganda 466
+United Kingdom 3898
+Ukraine 2782
+United States 21318
+Burkina Faso 501
+Uruguay 574
+Uzbekistan 1428
+Saint Vincent and the Grenadines 63
+Venezuela 2404
+British Virgin Islands 61
+Viet Nam 2594
+United States Virgin Islands 120
+Namibia 890
+Wallis and Futuna Islands 39
+Samoa 81
+Swaziland 73
+Yemen 667
+Zambia 1061
+Zimbabwe 623
+Indonesia 15597
+Guadeloupe 135
+Netherlands Antilles 89
+United Arab Emirates 448
+Timor-Leste 142
+Pitcairn Islands 51
+Palau 140
+Marshall Islands 241
+Saint Pierre and Miquelon 92
+Saint Helena 81
+San Marino 24
+Turks and Caicos Islands 104
+Western Sahara 338
+Serbia 652
+Holy See (Vatican City) 4
+Svalbard 3108
+Saint Martin 15
+Saint Barthelemy 14
+Guernsey 18
+Jersey 26
+South Georgia South Sandwich Islands 338
+Taiwan 363
+>>> feat = lyr[234]
+>>> print(feat.get("NAME"))
+San Marino
+>>> geom = feat.geom
+>>> print(geom.wkt)
+POLYGON ((12.415798 43.957954,12.450554 43.979721,12.453888 43.981667,12.4625 43.984718,12.471666 43.986938,12.492777 43.989166,12.505554 43.988609,12.509998 43.986938,12.510277 43.982773,12.511665 43.943329,12.510555 43.939163,12.496387 43.923332,12.494999 43.914719,12.487778 43.90583,12.474443 43.897217,12.464722 43.895554,12.459166 43.896111,12.416388 43.904716,12.412222 43.906105,12.407822 43.913658,12.403889 43.926666,12.404999 43.948326,12.408888 43.954994,12.415798 43.957954))
+>>> print(geom.json)
+{ "type": "Polygon", "coordinates": [ [ [ 12.415798, 43.957954 ], [ 12.450554, 43.979721 ], [ 12.453888, 43.981667 ], [ 12.4625, 43.984718 ], [ 12.471666, 43.986938 ], [ 12.492777, 43.989166 ], [ 12.505554, 43.988609 ], [ 12.509998, 43.986938 ], [ 12.510277, 43.982773 ], [ 12.511665, 43.943329 ], [ 12.510555, 43.939163 ], [ 12.496387, 43.923332 ], [ 12.494999, 43.914719 ], [ 12.487778, 43.90583 ], [ 12.474443, 43.897217 ], [ 12.464722, 43.895554 ], [ 12.459166, 43.896111 ], [ 12.416388, 43.904716 ], [ 12.412222, 43.906105 ], [ 12.407822, 43.913658 ], [ 12.403889, 43.926666 ], [ 12.404999, 43.948326 ], [ 12.408888, 43.954994 ], [ 12.415798, 43.957954 ] ] ] }
+>>> from my_app import load
+>>> load.run()
+Saved: Antigua and Barbuda
+Saved: Algeria
+Saved: Azerbaijan
+Saved: Albania
+Saved: Armenia
+Saved: Angola
+Saved: American Samoa
+Saved: Argentina
+Saved: Australia
+Saved: Bahrain
+Saved: Barbados
+Saved: Bermuda
+Saved: Bahamas
+Saved: Bangladesh
+Saved: Belize
+Saved: Bosnia and Herzegovina
+Saved: Bolivia
+Saved: Burma
+Saved: Benin
+Saved: Solomon Islands
+Saved: Brazil
+Saved: Bulgaria
+Saved: Brunei Darussalam
+Saved: Canada
+Saved: Cambodia
+Saved: Sri Lanka
+Saved: Congo
+Saved: Democratic Republic of the Congo
+Saved: Burundi
+Saved: China
+Saved: Afghanistan
+Saved: Bhutan
+Saved: Chile
+Saved: Cayman Islands
+Saved: Cameroon
+Saved: Chad
+Saved: Comoros
+Saved: Colombia
+Saved: Costa Rica
+Saved: Central African Republic
+Saved: Cuba
+Saved: Cape Verde
+Saved: Cook Islands
+Saved: Cyprus
+Saved: Denmark
+Saved: Djibouti
+Saved: Dominica
+Saved: Dominican Republic
+Saved: Ecuador
+Saved: Egypt
+Saved: Ireland
+Saved: Equatorial Guinea
+Saved: Estonia
+Saved: Eritrea
+Saved: El Salvador
+Saved: Ethiopia
+Saved: Austria
+Saved: Czech Republic
+Saved: French Guiana
+Saved: Finland
+Saved: Fiji
+Saved: Falkland Islands (Malvinas)
+Saved: Micronesia, Federated States of
+Saved: French Polynesia
+Saved: France
+Saved: Gambia
+Saved: Gabon
+Saved: Georgia
+Saved: Ghana
+Saved: Grenada
+Saved: Greenland
+Saved: Germany
+Saved: Guam
+Saved: Greece
+Saved: Guatemala
+Saved: Guinea
+Saved: Guyana
+Saved: Haiti
+Saved: Honduras
+Saved: Croatia
+Saved: Hungary
+Saved: Iceland
+Saved: India
+Saved: Iran (Islamic Republic of)
+Saved: Israel
+Saved: Italy
+Saved: Cote d'Ivoire
+Saved: Iraq
+Saved: Japan
+Saved: Jamaica
+Saved: Jordan
+Saved: Kenya
+Saved: Kyrgyzstan
+Saved: Korea, Democratic People's Republic of
+Saved: Kiribati
+Saved: Korea, Republic of
+Saved: Kuwait
+Saved: Kazakhstan
+Saved: Lao People's Democratic Republic
+Saved: Lebanon
+Saved: Latvia
+Saved: Belarus
+Saved: Lithuania
+Saved: Liberia
+Saved: Slovakia
+Saved: Liechtenstein
+Saved: Libyan Arab Jamahiriya
+Saved: Madagascar
+Saved: Martinique
+Saved: Mongolia
+Saved: Montserrat
+Saved: The former Yugoslav Republic of Macedonia
+Saved: Mali
+Saved: Morocco
+Saved: Mauritius
+Saved: Mauritania
+Saved: Malta
+Saved: Oman
+Saved: Maldives
+Saved: Mexico
+Saved: Malaysia
+Saved: Mozambique
+Saved: Malawi
+Saved: New Caledonia
+Saved: Niue
+Saved: Niger
+Saved: Aruba
+Saved: Anguilla
+Saved: Belgium
+Saved: Hong Kong
+Saved: Northern Mariana Islands
+Saved: Faroe Islands
+Saved: Andorra
+Saved: Gibraltar
+Saved: Isle of Man
+Saved: Luxembourg
+Saved: Macau
+Saved: Monaco
+Saved: Palestine
+Saved: Montenegro
+Saved: Mayotte
+Saved: Åland Islands
+Saved: Norfolk Island
+Saved: Cocos (Keeling) Islands
+Saved: Antarctica
+Saved: Bouvet Island
+Saved: French Southern and Antarctic Lands
+Saved: Heard Island and McDonald Islands
+Saved: British Indian Ocean Territory
+Saved: Christmas Island
+Saved: United States Minor Outlying Islands
+Saved: Vanuatu
+Saved: Nigeria
+Saved: Netherlands
+Saved: Norway
+Saved: Nepal
+Saved: Nauru
+Saved: Suriname
+Saved: Nicaragua
+Saved: New Zealand
+Saved: Paraguay
+Saved: Peru
+Saved: Pakistan
+Saved: Poland
+Saved: Panama
+Saved: Portugal
+Saved: Papua New Guinea
+Saved: Guinea-Bissau
+Saved: Qatar
+Saved: Reunion
+Saved: Romania
+Saved: Republic of Moldova
+Saved: Philippines
+Saved: Puerto Rico
+Saved: Russia
+Saved: Rwanda
+Saved: Saudi Arabia
+Saved: Saint Kitts and Nevis
+Saved: Seychelles
+Saved: South Africa
+Saved: Lesotho
+Saved: Botswana
+Saved: Senegal
+Saved: Slovenia
+Saved: Sierra Leone
+Saved: Singapore
+Saved: Somalia
+Saved: Spain
+Saved: Saint Lucia
+Saved: Sudan
+Saved: Sweden
+Saved: Syrian Arab Republic
+Saved: Switzerland
+Saved: Trinidad and Tobago
+Saved: Thailand
+Saved: Tajikistan
+Saved: Tokelau
+Saved: Tonga
+Saved: Togo
+Saved: Sao Tome and Principe
+Saved: Tunisia
+Saved: Turkey
+Saved: Tuvalu
+Saved: Turkmenistan
+Saved: United Republic of Tanzania
+Saved: Uganda
+Saved: United Kingdom
+Saved: Ukraine
+Saved: United States
+Saved: Burkina Faso
+Saved: Uruguay
+Saved: Uzbekistan
+Saved: Saint Vincent and the Grenadines
+Saved: Venezuela
+Saved: British Virgin Islands
+Saved: Viet Nam
+Saved: United States Virgin Islands
+Saved: Namibia
+Saved: Wallis and Futuna Islands
+Saved: Samoa
+Saved: Swaziland
+Saved: Yemen
+Saved: Zambia
+Saved: Zimbabwe
+Saved: Indonesia
+Saved: Guadeloupe
+Saved: Netherlands Antilles
+Saved: United Arab Emirates
+Saved: Timor-Leste
+Saved: Pitcairn Islands
+Saved: Palau
+Saved: Marshall Islands
+Saved: Saint Pierre and Miquelon
+Saved: Saint Helena
+Saved: San Marino
+Saved: Turks and Caicos Islands
+Saved: Western Sahara
+Saved: Serbia
+Saved: Holy See (Vatican City)
+Saved: Svalbard
+Saved: Saint Martin
+Saved: Saint Barthelemy
+Saved: Guernsey
+Saved: Jersey
+Saved: South Georgia South Sandwich Islands
+Saved: Taiwan
+>>> pnt_wkt="POINT(-95.3385 29.7245)"
+>>> from my_app.models import WorldBorder
+>>> WorldBorder.objects.filter(mpoly__contains=pnt_wkt)
+<QuerySet [<WorldBorder: United States>]>
+>>> pnt_wkt="POINT(19.306917 73.058134)"
+>>> WorldBorder.objects.filter(mpoly__contains=pnt_wkt)
+<QuerySet []>
+>>> from django.contrib.gis.geos import Point
+>>> 
+>>> pnt_wkt=Point(19.30
+6917 73.058134)
+  File "<console>", line 1
+    pnt_wkt=Point(19.306917 73.058134)
+                            ^
+SyntaxError: invalid syntax
+>>> pnt_wkt=Point(19.306917,73.058134)
+>>> WorldBorder.objects.get(mpoly__intersects=pnt_wkt)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "/home/girishparate/test_girish/env/lib/python3.8/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/girishparate/test_girish/env/lib/python3.8/site-packages/django/db/models/query.py", line 650, in get
+    raise self.model.DoesNotExist(
+my_app.models.WorldBorder.DoesNotExist: WorldBorder matching query does not exist.
+>>> pnt = Point(12.4604, 43.9420)
+>>> WorldBorder.objects.get(mpoly__intersects=pnt)
+<WorldBorder: San Marino>
+>>> from django.contrib.gis.geos import GEOSGeometry, Point
+>>> pnt = Point(954158.1, 4215137.1, srid=32140)
+>>> pnt = GEOSGeometry("SRID=32140;POINT(954158.1 4215137.1)")
+>>> qs = WorldBorder.objects.filter(mpoly__intersects=pnt)
+>>> print(qs.query)
+SELECT "my_app_worldborder"."id", "my_app_worldborder"."name", "my_app_worldborder"."area", "my_app_worldborder"."pop2005", "my_app_worldborder"."fips", "my_app_worldborder"."iso2", "my_app_worldborder"."iso3", "my_app_worldborder"."un", "my_app_worldborder"."region", "my_app_worldborder"."subregion", "my_app_worldborder"."lon", "my_app_worldborder"."lat", "my_app_worldborder"."mpoly"::bytea FROM "my_app_worldborder" WHERE ST_Intersects("my_app_worldborder"."mpoly", ST_Transform(ST_GeomFromEWKB('\001\001\000\000 \214}\000\0003333\\\036-AfffFX\024PA'::bytea), 4326))
+>>> qs
+<QuerySet [<WorldBorder: United States>]>
+>>> from django.contrib.gis.geoip2 import GeoIP2
+>>> g = GeoIP2()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "/home/girishparate/test_girish/env/lib/python3.8/site-packages/django/contrib/gis/geoip2/base.py", line 78, in __init__
+    raise GeoIP2Exception(
+django.contrib.gis.geoip2.base.GeoIP2Exception: GeoIP path must be provided via parameter or the GEOIP_PATH setting.
+>>> g = GeoIP2()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "/home/girishparate/test_girish/env/lib/python3.8/site-packages/django/contrib/gis/geoip2/base.py", line 78, in __init__
+    raise GeoIP2Exception(
+django.contrib.gis.geoip2.base.GeoIP2Exception: GeoIP path must be provided via parameter or the GEOIP_PATH setting.
+>>> from django.contrib.gis.geoip2 import GeoIP2
+>>> g = GeoIP2()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "/home/girishparate/test_girish/env/lib/python3.8/site-packages/django/contrib/gis/geoip2/base.py", line 78, in __init__
+    raise GeoIP2Exception(
+django.contrib.gis.geoip2.base.GeoIP2Exception: GeoIP path must be provided via parameter or the GEOIP_PATH setting.
+>>> from django.contrib.gis.geoip2 import GeoIP2
+>>> g = GeoIP2()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "/home/girishparate/test_girish/env/lib/python3.8/site-packages/django/contrib/gis/geoip2/base.py", line 78, in __init__
+    raise GeoIP2Exception(
+django.contrib.gis.geoip2.base.GeoIP2Exception: GeoIP path must be provided via parameter or the GEOIP_PATH setting.
+>>> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+conda: command not found
+girishparate@sperentes-asus02:~/test_girish/testgis$ source ~/test_girish/env/bin/activate
+(env) girishparate@sperentes-asus02:~/test_girish/testgis$ python manage.py shell
+Python 3.8.10 (default, May 26 2023, 14:05:08) 
+[GCC 9.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from django.contrib.gis.geoip2 import GeoIP2
+>>> g = GeoIP2()
+>>> g.city("103.211.43.54")
+{'city': 'Bhiwandi', 'continent_code': 'AS', 'continent_name': 'Asia', 'country_code': 'IN', 'country_name': 'India', 'dma_code': None, 'is_in_european_union': False, 'latitude': 19.279, 'longitude': 73.0604, 'postal_code': '421308', 'region': 'MH', 'time_zone': 'Asia/Kolkata'}
+>>> 
+
+
+
+
+
